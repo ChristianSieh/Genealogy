@@ -137,8 +137,44 @@ Date:   Fall 2015
 	)
 )
 
+(defun auntsUncles ( name )
+	(let ((tempParents (parents name)))
 
+		(let ((tempAuntUncle))
+			(dolist (parent tempParents)
+				(setf tempAuntUncle (nconc (siblings parent) tempAuntUncle))
+			)
 
+			(setf tempAuntUncle (remove-duplicates tempAuntUncle))
+		)
+	)
+)
+
+(defun niecesNephews ( name )
+	(let ((tempSiblings (siblings name)))
+
+		(let ((tempNiecesNephews))
+			(dolist (sibling tempSiblings)
+				(setf tempNiecesNephews (nconc (children sibling) tempNiecesNephews))
+			)
+
+			(setf tempNiecesNephews (remove-duplicates tempNiecesNephews))
+		)
+	)
+)
+
+(defun cousins ( name )
+	(let ((tempAuntsUncles (auntsUncles name)))
+
+		(let ((tempCousins))
+			(dolist (auntUncle tempAuntsUncles)
+				(setf tempCousins (nconc (children auntUncle) tempCousins))
+			)
+
+			(setf tempCousins (remove-duplicates tempCousins))
+		)
+	)
+)
 
 
 
