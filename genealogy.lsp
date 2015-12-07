@@ -11,9 +11,7 @@ Date:   Fall 2015
 
 (setf database nil)
 
-
 (defstruct person name gender parents children)
-
 
 (defun setstruct ( line )
 	
@@ -21,13 +19,7 @@ Date:   Fall 2015
 		:parents (nth 2 line) :children (nth 3 line))
 	     ))	
 	
-	(push struct database)
-
-	(print struct)
-	;(print (person-name struct))
-	;(print (person-gender struct))
-	;(print (person-parents struct))
-	;(print (person-children struct))
+		(push struct database)
 	)
 )
 
@@ -35,13 +27,10 @@ Date:   Fall 2015
 ; Original Auther: Dr. John Weiss
 ; Modified by: Christian Sieh
 (defun fileio ( filename )
-    "(fileio filename): open an input file and read the data"
-
     ; check for correct usage
     (when (null filename) (return-from fileio "Usage: fileio.lsp filename"))
 
     ; read through file using with-open-file
-    (format t "~%Opening file ~a using with-open-file~%" filename)
     (with-open-file (fin filename :if-does-not-exist nil)
         (when (null fin) (return-from fileio (format nil "Error: cannot open file ~a" filename)))
 	(do 
@@ -51,8 +40,6 @@ Date:   Fall 2015
 	)
     )
 )
-
-
 
 #|
 	*****main.lsp *****
@@ -66,14 +53,9 @@ Date:   Fall 2015
 |#
 
 ; main function
-(defun main ( args )
-	"(main args): emulate a main function, called with command-line args"
-	(format t "~D command line arguments: ~A" (length args) args)
-
-
-	
+(defun main ( args )	
 	; call the fileio function, passing the first command-line argument as an input filename
-	(format t "~a~%" (fileio (car *args*)))
+	(fileio (car *args*))
 )
 
 ; call the main function, passing command-line arguments
