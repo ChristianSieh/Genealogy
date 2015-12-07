@@ -3,9 +3,10 @@
 
 Illustrates file I/O in Lisp.
 
-Author: John M. Weiss, Ph.D.
+Author: Christian Sieh
 Class:  CSC461 Programming Languages
-Date:   Fall 2015
+Date:   Fall 12/6/2015
+
 
 |#
 
@@ -61,9 +62,14 @@ Date:   Fall 2015
 ; call the main function, passing command-line arguments
 (main *ARGS*)
 
+#|
+ | Author: Christian Sieh
+ | This function given a name will search the database for all
+ | structures matching that name and then return the struct
+ |#
 (defun myfind ( name )
 	(dolist
-		(item database struct)
+		(item database)
 		(when (equalp name (person-name item))
 			(let ((struct item))
 				(return struct)
@@ -72,14 +78,38 @@ Date:   Fall 2015
 	)
 )
 
+#|
+ | Author: Christian Sieh
+ | This function will find the structure for the given name and then
+ | return that structures parents field.
+ |#
 (defun parents ( name )
-	(person-parents (myfind name))
+	(let ((foundStruct (myfind name)))
+		(if (null foundStruct)
+			()
+			(person-parents foundStruct)
+		)
+	)
 )
 
+#| Author: Christian Sieh
+ | This function will find the structure for the given name and then
+ | return that structures children field.
+ |#
 (defun children ( name )
-	(person-children (myfind name))
+	(let ((foundStruct (myfind name)))
+		(if (null foundStruct)
+			()
+			(person-children (myfind name))
+		)
+	)
 )
 
+#|
+ | Author: Christian Sieh
+ | This function will go through the database and return the siblings
+ | for the name give
+ |#
 (defun siblings ( name )
 	(let ((tempParents (parents name)))
 
