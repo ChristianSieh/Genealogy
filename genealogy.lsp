@@ -176,7 +176,45 @@ Date:   Fall 2015
 	)
 )
 
+(defun ancestors ( name )
 
+	(if (null (parents name))
+		()
+		(let ((tempParents (parents name)))
+			(let ((tempAncestors tempParents))
+				(dolist (parent tempParents) 
+					(setf tempAncestors (nconc (ancestors parent) tempAncestors))
+				)
+
+				(setf tempAncestors (remove-duplicates tempAncestors))
+			)
+		)
+	)
+)
+
+(defun descendants ( name )
+
+	(if (null (children name))
+		()
+		(let ((tempChildren (children name)))
+			(let ((tempDescendants tempChildren))
+				(dolist (child tempChildren)
+					(setf tempDescendants (nconc (descendants child) tempDescendants))
+				)
+
+				(setf tempDescendants (remove-duplicates tempDescendants))
+			)
+		)
+	)
+)
+
+(defun maleFilter ( lst )
+
+)
+
+(defun femaleFilter ( lst )
+
+)	
 
 
 
