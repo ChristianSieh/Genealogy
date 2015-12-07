@@ -11,7 +11,7 @@ mapped onto a person struct and pushed on to the global variable
 *database*. After the database is built you will then be able to run
 queries against the database by using the repl. An example query is:
 (parents 'mike). This function will return a list with Mike's parents.
-If Mike had no parents :'( then nil is returned instead. The queries
+If Mike has no parents :( then nil is returned instead. The queries
 are not case sensitive and if a name that is not in the database
 is entered into the query nil will be returned.
 |#
@@ -19,7 +19,7 @@ is entered into the query nil will be returned.
 ;Global variable that will hold all of the person structs
 (setf database nil)
 
-;The struct we will use to hold each person's infromation
+;The struct we will use to hold each person's information
 (defstruct person name gender parents children)
 
 #|
@@ -63,25 +63,9 @@ is entered into the query nil will be returned.
     )
 )
 
-#|
-	*****main.lsp *****
 
-Emulate a main function in Lisp, with command-line arguments.
-
-Author: John M. Weiss, Ph.D.
-Class:  CSC461 Programming Languages
-Date:   Fall 2015
-
-|#
-
-; main function
-(defun main ( args )	
-	; call the fileio function, passing the first command-line argument as an input filename
-	(fileio (car *args*))
-)
-
-; call the main function, passing command-line arguments
-(main *ARGS*)
+; call the fileio function, passing the first command-line argument as an input filename
+(fileio (car *args*))
 
 #|
  | Author: Christian Sieh
